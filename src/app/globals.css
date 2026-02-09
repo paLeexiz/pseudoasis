@@ -20,6 +20,10 @@ body {
   color: aliceblue;
 }
 
+body .gcse-search input{
+  color: black;
+}
+
 
 /* Capa de contenido por encima */
 #__next > div {
@@ -177,6 +181,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.gcse-search input{
-  color: #000;
+.gcse-search input {
+  color: #000 !important;
 }
