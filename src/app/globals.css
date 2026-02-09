@@ -10,6 +10,10 @@ html, body, #__next {
   height: 100%;
 }
 
+nav input{
+  color: black !important;
+}
+
 body {
   background: #0a1931;
   /*background: linear-gradient(135deg, #8d86c9 0%, #cac4ce 60%, #9067c6 100%);*/
@@ -17,11 +21,7 @@ body {
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
-  color: black;
-}
-
-body .gcse-search input{
-  color: black;
+  color: aliceblue;
 }
 
 
