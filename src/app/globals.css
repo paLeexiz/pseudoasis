@@ -14,6 +14,10 @@ nav input{
   color: black !important;
 }
 
+nav .gcse-search * {
+  color: black !important;
+}
+
 body {
   background: #0a1931;
   /*background: linear-gradient(135deg, #8d86c9 0%, #cac4ce 60%, #9067c6 100%);*/
