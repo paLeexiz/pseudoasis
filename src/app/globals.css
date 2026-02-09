@@ -10,11 +10,11 @@ html, body, #__next {
   height: 100%;
 }
 
-nav input{
+.busquedas *{
   color: black !important;
 }
 
-nav .gcse-search * {
+nav input{
   color: black !important;
 }
 
