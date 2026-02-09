@@ -1,0 +1,24 @@
+#se activa con docker compose up --build
+#para cerrarlo docker-compose down
+
+services:
+
+  nextjs:
+
+    build: .
+
+    container_name: next_app
+
+    ports:
+
+      - "3000:3000"
+
+    volumes:
+
+      - .:/app
+
+      - /app/node_modules
+
+    environment:
+
+      - CHOKIDAR_USEPOLLING=true

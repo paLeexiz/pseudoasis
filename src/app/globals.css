@@ -1,26 +1,178 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  /* margin: 0; */
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body, #__next {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #0a1931;
+  /*background: linear-gradient(135deg, #8d86c9 0%, #cac4ce 60%, #9067c6 100%);*/
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  color: aliceblue;
+}
+
+
+/* Capa de contenido por encima */
+#__next > div {
+  position: relative;
+  z-index: 10;
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+/*desde aqui incian mis estilos pq si*/
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2.5rem;        
+  font-family: var(--font-stack-headline);
+  font-size: 16px;
+  justify-content: center;
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #b3cfe5;
+  font-size: 20px;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-label {
+  text-decoration: none;
+  font-size: 20px;
+  color: #4a7fa7;
+}
+
+.breadcrumbs ol {
+  display: inline;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs li {
+  display: inline;
+}
+
+.hVision, .hMision, .hValores {
+  font-size: 60px;
+  font-family: var(--font-stack-headline);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  padding: 40px;
+  /* color: #f6fafd; */
+  /*no tengo idea del por que, pero funcionó jaja*/
+}
+
+.que-es, .enfoque {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 25px;
+  max-width: 800px;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 20px 12px rgba(0, 0, 0, 0.15);
+  color: #b3cfe5;
+  line-height: 1.6;
+  animation: fadeInUp 2s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+  margin: auto;
+}
+
+.pVision, .pMision, .pValores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 25px;
+  max-width: 800px;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 20px 12px rgba(0, 0, 0, 0.15);
+  color: #b3cfe5;
+  line-height: 1.6;
+  animation: fadeInUp 2s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+  margin: auto;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lista-valores {
+  list-style-type: disc;
+  list-style-position: inside;
+  font-size: 22px;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  /*pruebas pedorras de estilos*/
+    border-radius: 12px;
+  box-shadow: 0 20px 12px rgba(0, 0, 0, 0.15);
+  color: #b3cfe5;
+  line-height: 1.6;
+  animation: fadeInUp 2s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+  margin: auto;
+}
+
+.lista-valores li {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.lista-valores li:nth-child(1) { animation-delay: 0.2s; }
+.lista-valores li:nth-child(2) { animation-delay: 0.4s; }
+.lista-valores li:nth-child(3) { animation-delay: 0.6s; }
+.lista-valores li:nth-child(4) { animation-delay: 0.8s; }
+.lista-valores li:nth-child(5) { animation-delay: 1.0s; }
+.lista-valores li:nth-child(6) { animation-delay: 1.2s; }
+.lista-valores li:nth-child(7) { animation-delay: 1.4s; }
+.lista-valores li:nth-child(8) { animation-delay: 1.6s; }
+.lista-valores li:nth-child(9) { animation-delay: 1.8s; }
+.lista-valores li:nth-child(10) { animation-delay: 2.0s; }
+.lista-valores li:nth-child(11) { animation-delay: 2.2s; }
+.lista-valores li:nth-child(12) { animation-delay: 2.4s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px);  }
+  to { opacity: 1; transform: translateY(0); }
 }

@@ -1,0 +1,217 @@
+/* Título principal - Stack Sans Headline */
+.hero-title {
+  font-family: var(--font-stack-headline);
+  font-weight: 450;        
+  font-size: 10rem;         
+  line-height: 0.8;          
+  letter-spacing: -0.05em;    
+  color: #F6FAFD;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+@media (min-width: 440px) {
+  .hero-title {
+    font-size: 2.8rem;       
+  }
+}
+
+@media (min-width: 668px) {
+  .hero-title {
+    font-size: 3.9rem;       
+  }
+}
+
+@media (min-width: 1020px) {
+  .hero-title {
+    font-size: 2.9rem;        /* para que sea más grande */
+  }
+}
+
+
+.hero-description {
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out forwards 0.4s;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s;
+}
+
+.hero-cta:hover::before {
+  left: 100%;
+}
+
+/* Descripción debajo del título */
+.hero-container {
+  padding-left: 1rem;     
+  padding-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .hero-container {
+    padding-left: 6.5rem;   /* más a la derecha en desktop */
+    padding-top: 1.5rem;    /* más abajo */
+  }
+}
+
+/* Descripción debajo del título */
+.hero-description {
+  font-family: var(--font-elms-sans);
+  font-weight: 470;           /* ancho de letra */
+  font-size: 0.5rem;           
+  line-height: 1.8;           /* amplio */
+  color: #B3CFE5;           
+  max-width: 45rem;           /*mas estrecho para que no se extienda */
+  margin-bottom: 2.5rem;
+  padding-left: 6.5rem;           /* izquierda */
+}
+
+/* Ajustes responsivos */
+@media (min-width: 640px) {
+  .hero-description {
+    font-size: 1.125rem;     
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-description {
+    font-size: 1rem;       /* tamaño */
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-description {
+    font-size: 1rem;      
+  }
+}
+
+/* botón "saber mas" */
+.hero-cta {
+  font-family: var(--font-stack-headline);
+  font-weight: 600;
+  font-size: 1.25rem;
+  padding: 1rem 2.5rem;
+  background-color: #B3CFE5;
+  color: #0A1931;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  margin-top: -2rem; /* hacia arriba */
+  margin-left: 6.5rem; /* hacia la derecha */
+}
+
+.hero-cta:hover {
+  background-color: #F6FAFD;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(144, 103, 198, 0.4), 0 -10px 25px rgba(144, 103, 198, 0.4);
+}
+
+/* Estrella decorativa*/
+.hero-star {
+  font-size: 6rem;
+  color: #F6FAFD;
+  animation: pulse-slow 6s ease-in-out infinite;
+  position: relative;
+  left: 15rem;                /* a la derecha */
+  top: 1rem;                 /* hacia a arriba */
+  margin-bottom: 0;
+}
+
+/* Logo */
+.hero-logo-container {
+    width: 450px;               
+    height: 450px;
+    margin: 0;                  
+    position: absolute;         
+    top: 35%;                   /* Subir o bajar */
+    right: 5%;                  /* distancia desde el borde derecho */
+    transform: translateY(-20%); /* subir */
+  }
+
+@media (min-width: 768px) {
+  .hero-logo-container {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+/* Ajustes para la sección ¿Qué es SIELO? */
+.que-es-section {
+  background: #f6f6f6;
+  backdrop-filter: blur(10px);
+}
+
+.que-es-title {
+  font-family: var(--font-stack-headline);
+  font-weight: 900;
+  font-size: 2.8rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #f6f6f6;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .que-es-title {
+    font-size: 3.8rem;
+  }
+}
+
+.que-es-left p,
+.que-es-right p {
+  margin-bottom: 1.5rem;
+}
+
+.que-es-right {
+  border-left: 4px solid #f6f6f6;
+  padding-left: 2rem;
+}
+
+.que-es-right h3 {
+  font-family: var(--font-stack-headline);
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: #f6f6f6;
+  margin-bottom: 1.2rem;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.10s ease-out forwards;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
