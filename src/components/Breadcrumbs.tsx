@@ -18,7 +18,7 @@ export default function Breadcrumbs() {
         <nav className="breadcrumbs" aria-label="Breadcrumb">
             <ol style={{fontSize: "1.5rem", fontWeight: "bold"}}>
                 <li>
-                    <Link href="/">Principal</Link>
+                    <Link href="/HeroSection">Principal</Link>
                 </li>
                 {segments.map((segment, index) => {
                     const href = "/" + segments.slice(0, index + 1).join("/");

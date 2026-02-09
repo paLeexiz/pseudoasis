@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import Problematica from "@/components/Problematica";
+// import Problematica from "@/components/Problematica";
 
 export default function InicioPage() {
   return (

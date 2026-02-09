@@ -64,6 +64,7 @@ export default function LoginForm() {
     const data = await res.json();
 
     if (res.ok) {
+      localStorage.setItem("isAuthenticated", "true");
       alert("Inicio de sesión exitoso");
       router.push("/inicio");
     } else {

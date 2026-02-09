@@ -1,8 +1,23 @@
 "use client";
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("isAuthenticated");
+    if (auth === "true") setIsAuthenticated(true);
+  }, []);
+  
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, route: string) => {
+    if (!isAuthenticated) {
+      e.preventDefault();
+      alert("Por favor, inicie sesión para acceder a esta sección.");
+    } else {
+      window.location.href = route;
+    }
+  }
   // const [open, setOpen] = useState(false);
   /**pruebas para hacer un navbar desplegable */
   return (
@@ -48,10 +63,10 @@ export default function Navbar() {
               </ul>
             )}
           </li> */}
-          <li><a href="/Mision" className="hover:text-purple transition">Nuestra Misión</a></li>
-          <li><a href="/Vision" className="hover:text-purple transition">Nuestra Visión</a></li>
-          <li><a href="/Valores" className="hover:text-purple transition">Nuestros Valores</a></li>
-          <li><a href="/ContactForm" className='hover:text-purple transition'>Buzón</a></li>
+          <li><a href="/Mision" onClick={(e) => handleNavClick(e, "/Mision")} className="hover:text-purple transition">Nuestra Misión</a></li>
+          <li><a href="/Vision" onClick={(e) => handleNavClick(e, "/Vision")} className="hover:text-purple transition">Nuestra Visión</a></li>
+          <li><a href="/Valores" onClick={(e) => handleNavClick(e, "/Valores")} className="hover:text-purple transition">Nuestros Valores</a></li>
+          <li><a href="/ContactForm" onClick={(e) => handleNavClick(e, "/ContactForm")} className='hover:text-purple transition'>Buzón</a></li>
         </ul>
 
         <button className="w-10 h-10 bg-light-purple/30 rounded-full flex items-center justify-center text-off-white">
