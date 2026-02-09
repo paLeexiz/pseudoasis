@@ -46,6 +46,10 @@ export default function Navbar() {
             quality={90}
           />
         </div>
+
+        <script async src="https://cse.google.com/cse.js?cx=47f3488f9331244f1">
+        </script>
+        <div className="gcse-search"></div>
       </div>
 
       <div className="flex items-center gap-10">
@@ -78,3 +82,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
