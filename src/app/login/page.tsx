@@ -124,6 +124,10 @@ export default function LoginForm() {
             <button type="submit">Iniciar Sesión</button>
 
             <p className="login-text">
+              <Link href="/recuperar-password">¿Olvidaste tu contraseña?</Link>
+            </p>
+
+            <p className="login-text">
               ¿No tienes cuenta? <Link href="/registro">Regístrate</Link>
             </p>
           </form>

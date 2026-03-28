@@ -3,11 +3,19 @@ import { usuarios } from "@/lib/usuarios-db";
 
 export async function POST(req: Request) {
   try {
-    const { nombre, email, password, telefono, captchaResultado } =
-      await req.json();
+    const { 
+      nombre, email, password, telefono, 
+      preguntaSecreta1, respuestaSecreta1,
+      preguntaSecreta2, respuestaSecreta2,
+      preguntaSecreta3, respuestaSecreta3,
+      captchaResultado 
+    } = await req.json();
 
     // Validaciones del lado del servidor
-    if (!nombre || !email || !password || !telefono) {
+    if (!nombre || !email || !password || !telefono || 
+        !preguntaSecreta1 || !respuestaSecreta1 ||
+        !preguntaSecreta2 || !respuestaSecreta2 ||
+        !preguntaSecreta3 || !respuestaSecreta3) {
       return NextResponse.json(
         { message: "Todos los campos son obligatorios" },
         { status: 400 }
@@ -67,16 +75,47 @@ export async function POST(req: Request) {
       );
     }
 
+    const preguntasValidas = [
+      "¿Cuál es el nombre de tu primera mascota?",
+      "¿En qué ciudad naciste?",
+      "¿Cuál es tu comida favorita?",
+      "¿Cuál era el nombre de tu mejor amigo de la infancia?"
+    ];
+
+    const preguntasSeleccionadas = [preguntaSecreta1, preguntaSecreta2, preguntaSecreta3];
+    const preguntasUnicas = new Set(preguntasSeleccionadas);
+
+    if (preguntasUnicas.size < 3) {
+      return NextResponse.json(
+        { message: "Las 3 preguntas secretas deben ser diferentes" },
+        { status: 400 }
+      );
+    }
+
+    for (const pregunta of preguntasSeleccionadas) {
+      if (!preguntasValidas.includes(pregunta)) {
+        return NextResponse.json(
+          { message: "Una o más preguntas secretas no son válidas" },
+          { status: 400 }
+        );
+      }
+    }
+
     // Agregar usuario al array
     usuarios.push({
       nombre: nombreLimpio,
       email,
       password, // En producción real, deberías hashear la contraseña
       telefono,
+      preguntasSecretas: [preguntaSecreta1, preguntaSecreta2, preguntaSecreta3],
+      respuestasSecretas: [respuestaSecreta1, respuestaSecreta2, respuestaSecreta3],
     });
 
+    console.log("================= REGISTRO ==================");
     console.log("Usuario registrado:", { nombre: nombreLimpio, email, telefono });
     console.log("Total usuarios:", usuarios.length);
+    console.log("Lista completa de usuarios:", JSON.stringify(usuarios.map(u => ({ email: u.email, nombre: u.nombre })), null, 2));
+    console.log("=============================================");
 
     return NextResponse.json(
       { message: "Usuario registrado exitosamente" },

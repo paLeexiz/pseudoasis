@@ -20,6 +20,12 @@ export default function RegisterForm() {
     password: "",
     confirmar: "",
     telefono: "",
+    preguntaSecreta1: "",
+    respuestaSecreta1: "",
+    preguntaSecreta2: "",
+    respuestaSecreta2: "",
+    preguntaSecreta3: "",
+    respuestaSecreta3: "",
     captcha: "",
   });
 
@@ -35,6 +41,20 @@ export default function RegisterForm() {
 
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const opcionesPreguntas = [
+    "¿Cuál es el nombre de tu primera mascota?",
+    "¿En qué ciudad naciste?",
+    "¿Cuál es tu comida favorita?",
+    "¿Cuál era el nombre de tu mejor amigo de la infancia?"
+  ];
+
+  const getOpcionesDisponibles = (preguntaActual: string) => {
+    const seleccionadas = [form.preguntaSecreta1, form.preguntaSecreta2, form.preguntaSecreta3].filter(Boolean);
+    return opcionesPreguntas.filter(
+      (opcion) => opcion === preguntaActual || !seleccionadas.includes(opcion)
+    );
   };
 
   const validar = () => {
@@ -60,6 +80,19 @@ export default function RegisterForm() {
 
     if (!/^\d{10}$/.test(form.telefono))
       e.telefono = "Teléfono inválido (10 dígitos)";
+
+    if (!form.preguntaSecreta1 || !form.preguntaSecreta2 || !form.preguntaSecreta3) {
+      e.preguntasSecretas = "Debes seleccionar 3 preguntas secretas";
+    } else {
+      const preguntasUnicas = new Set([form.preguntaSecreta1, form.preguntaSecreta2, form.preguntaSecreta3]);
+      if (preguntasUnicas.size < 3) {
+        e.preguntasSecretas = "Las 3 preguntas deben ser diferentes";
+      }
+    }
+
+    if (!form.respuestaSecreta1.trim() || !form.respuestaSecreta2.trim() || !form.respuestaSecreta3.trim()) {
+      e.respuestasSecretas = "Debes responder a las 3 preguntas";
+    }
 
     if (parseInt(form.captcha) !== num1 + num2)
       e.captcha = "Captcha incorrecto";
@@ -152,6 +185,86 @@ export default function RegisterForm() {
               <label>Teléfono</label>
               <span className="error">{errors.telefono}</span>
             </div>
+
+            <h3 className="text-white text-lg mt-4 mb-2 font-bold">Preguntas de Seguridad</h3>
+            {errors.preguntasSecretas && <span className="error block mb-2">{errors.preguntasSecretas}</span>}
+            {errors.respuestasSecretas && <span className="error block mb-2">{errors.respuestasSecretas}</span>}
+
+            <div className="input-group">
+              <select
+                name="preguntaSecreta1"
+                required
+                onChange={handleChange}
+                value={form.preguntaSecreta1}
+                className="w-full bg-black/50 border-2 border-black p-4 text-white rounded-xl outline-none focus:border-blue-600 transition-all placeholder:text-gray-700 mt-2 mb-2"
+                style={{ appearance: 'none' }}
+              >
+                <option value="" disabled>Selecciona la pregunta 1</option>
+                {getOpcionesDisponibles(form.preguntaSecreta1).map((opcion, idx) => (
+                  <option key={idx} value={opcion}>{opcion}</option>
+                ))}
+              </select>
+            </div>
+            <div className="input-group">
+              <input
+                name="respuestaSecreta1"
+                placeholder=" "
+                required
+                onChange={handleChange}
+              />
+              <label>Respuesta 1</label>
+            </div>
+
+            <div className="input-group">
+              <select
+                name="preguntaSecreta2"
+                required
+                onChange={handleChange}
+                value={form.preguntaSecreta2}
+                className="w-full bg-black/50 border-2 border-black p-4 text-white rounded-xl outline-none focus:border-blue-600 transition-all placeholder:text-gray-700 mt-2 mb-2"
+                style={{ appearance: 'none' }}
+              >
+                <option value="" disabled>Selecciona la pregunta 2</option>
+                {getOpcionesDisponibles(form.preguntaSecreta2).map((opcion, idx) => (
+                  <option key={idx} value={opcion}>{opcion}</option>
+                ))}
+              </select>
+            </div>
+            <div className="input-group">
+              <input
+                name="respuestaSecreta2"
+                placeholder=" "
+                required
+                onChange={handleChange}
+              />
+              <label>Respuesta 2</label>
+            </div>
+
+            <div className="input-group">
+              <select
+                name="preguntaSecreta3"
+                required
+                onChange={handleChange}
+                value={form.preguntaSecreta3}
+                className="w-full bg-black/50 border-2 border-black p-4 text-white rounded-xl outline-none focus:border-blue-600 transition-all placeholder:text-gray-700 mt-2 mb-2"
+                style={{ appearance: 'none' }}
+              >
+                <option value="" disabled>Selecciona la pregunta 3</option>
+                {getOpcionesDisponibles(form.preguntaSecreta3).map((opcion, idx) => (
+                  <option key={idx} value={opcion}>{opcion}</option>
+                ))}
+              </select>
+            </div>
+            <div className="input-group">
+              <input
+                name="respuestaSecreta3"
+                placeholder=" "
+                required
+                onChange={handleChange}
+              />
+              <label>Respuesta 3</label>
+            </div>
+
 
             <div className="input-group">
               <input

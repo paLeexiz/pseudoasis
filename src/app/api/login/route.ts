@@ -28,10 +28,17 @@ export async function POST(req: Request) {
       );
     }
 
+    console.log("================= LOGIN ==================");
+    console.log("Intentando login con email:", email);
+    console.log("Total usuarios en BD:", usuarios.length);
+    console.log("Lista de correos registrados:", usuarios.map(u => u.email));
+
     // Buscar usuario en el array
     const usuario = usuarios.find((u) => u.email === email);
 
     if (!usuario) {
+      console.log("-> Fallo: Usuario no encontrado");
+      console.log("==========================================");
       return NextResponse.json(
         { message: "Usuario no encontrado" },
         { status: 404 }
@@ -40,13 +47,16 @@ export async function POST(req: Request) {
 
     // Verificar contraseña (comparación directa sin hash)
     if (usuario.password !== password) {
+      console.log("-> Fallo: Contraseña incorrecta para", email);
+      console.log("==========================================");
       return NextResponse.json(
         { message: "Contraseña incorrecta" },
         { status: 401 }
       );
     }
 
-    console.log("Login exitoso:", { email });
+    console.log("-> Éxito: Login exitoso para", email);
+    console.log("==========================================");
 
     // Login exitoso
     return NextResponse.json(

@@ -11,7 +11,6 @@ export default function FloatingHelpButton() {
         const isSup = emisor === 'sup';
         const msgDiv = document.createElement('div');
         msgDiv.className = `flex w-full mb-4 ${isSup ? 'justify-start' : 'justify-end'}`;
-
         const burbuja = document.createElement('div');
         burbuja.className = `rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,0.4)] ${isSup ? 'bg-[#9fadc0] text-[#1A1C22] rounded-tl-none' : 'bg-[#4A5568] text-[#E2E8F0] rounded-tr-none border border-black'
             }`;
