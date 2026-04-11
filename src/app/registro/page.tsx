@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import ImageCaptcha from "@/components/ImageCaptcha";
 
-
 export default function RegisterForm() {
   const router = useRouter();
 
@@ -14,6 +13,8 @@ export default function RegisterForm() {
   const [num2, setNum2] = useState(0);
   const [imageCaptchaValid, setImageCaptchaValid] = useState(false);
   const [errors, setErrors] = useState<any>({});
+  const [loading, setLoading] = useState(false);        // ← Nuevo
+
   const [form, setForm] = useState({
     nombre: "",
     email: "",
@@ -52,8 +53,7 @@ export default function RegisterForm() {
       e.email = "Correo inválido";
 
     if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(form.password))
-      e.password =
-        "Debe tener 8 caracteres, una mayúscula, un número y un símbolo";
+      e.password = "Debe tener 8 caracteres, una mayúscula, un número y un símbolo";
 
     if (form.password !== form.confirmar)
       e.confirmar = "Las contraseñas no coinciden";
@@ -75,17 +75,33 @@ export default function RegisterForm() {
     e.preventDefault();
     if (!validar()) return;
 
-    const res = await fetch("/api/registro", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, captchaResultado: num1 + num2 }),
-    });
+    setLoading(true);   // ← Nuevo
 
-    const data = await res.json();
-    alert(data.message);
+    try {
+      const res = await fetch("/api/validacion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: form.nombre.trim(),
+          email: form.email,
+          password: form.password,
+          telefono: form.telefono,
+        }),
+      });
 
-    if (res.ok) {
-      router.push("/login");
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Registro exitoso.\n\n Por favor revisa tu correo electrónico para verificar tu cuenta.");
+        router.push("/login");
+      } else {
+        alert(data.error || "Hubo un error al procesar el registro");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error de conexión. Inténtalo de nuevo.");
+    } finally {
+      setLoading(false);   // ← Nuevo
     }
   };
 
@@ -171,7 +187,9 @@ export default function RegisterForm() {
               </span>
             )}
 
-            <button type="submit">Registrarse</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Procesando..." : "Registrarse"}
+            </button>
 
             <p className="login-text">
               ¿Ya tienes cuenta? <Link href="/login">Inicia sesión</Link>
