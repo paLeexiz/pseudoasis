@@ -10,6 +10,14 @@ html, body, #__next {
   height: 100%;
 }
 
+.busquedas *{
+  color: black !important;
+}
+
+nav input{
+  color: black !important;
+}
+
 body {
   background: #0a1931;
   /*background: linear-gradient(135deg, #8d86c9 0%, #cac4ce 60%, #9067c6 100%);*/
@@ -175,4 +183,8 @@ body {
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px);  }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.gcse-search input {
+  color: #000 !important;
 }

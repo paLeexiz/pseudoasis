@@ -15,7 +15,7 @@ export default function Breadcrumbs() {
     }
 
     return (
-        <nav className="breadcrumbs" aria-label="Breadcrumb">
+        <nav className="breadcrumbs top-1" aria-label="Breadcrumb">
             <ol style={{fontSize: "1.5rem", fontWeight: "bold"}}>
                 <li>
                     <Link href="/HeroSection">Principal</Link>
@@ -39,4 +39,5 @@ export default function Breadcrumbs() {
             </ol>
         </nav>
     );
+
 }
