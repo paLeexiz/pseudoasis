@@ -47,9 +47,9 @@ export default function Navbar() {
           />
         </div>
 
-        <script async src="https://cse.google.com/cse.js?cx=47f3488f9331244f1">
+        {/* <script async src="https://cse.google.com/cse.js?cx=47f3488f9331244f1">
         </script>
-        <div className="gcse-search"></div>
+        <div className="gcse-search"></div> */}
       </div>
 
       <div className="flex items-center gap-10">
