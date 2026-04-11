@@ -1,9 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
-import VerificationEmail from '../../../lib/verification-email';
-
+import nodemailer from 'nodemailer';
+import { render } from '@react-email/render';
+import VerificationEmail from '../../../lib/verification-email';import { usuarios } from '@/lib/usuarios-db';
 // ==================== CONFIGURACIÓN ====================
-const resend = new Resend('re_FhE4P6Xk_2aD9zQFu89wCKimkNsp18kEe'); // ← Cambia por tu API Key real
+
+// hay que hacerlo con un smpt
+
+const transporter = nodemailer.createTransport({
+host: process.env.EMAIL_HOST || 'smtp.gmail.com', // Cambia por tu host SMTP
+port: parseInt(process.env.EMAIL_PORT || '587'), // Cambia por tu puerto SMTP
+secure: process.env.EMAIL_SECURE === 'true', // true para 465, false para otros puertos
+auth: {
+  user: process.env.EMAIL_USER,
+  pass: process.env.EMAIL_PASS,
+  },
+});
+// const resend = new Resend('re_FhE4P6Xk_2aD9zQFu89wCKimkNsp18kEe'); // ← Cambia por tu API Key real
 
 // Almacenamiento temporal en memoria (mejor que simulación)
 const verificationTokens = new Map<string, {
@@ -48,25 +60,41 @@ export async function POST(request: NextRequest) {
 
     const verificationUrl = `http://localhost:3000/validacion?token=${token}&email=${encodeURIComponent(email)}`;
 
-    // Enviar correo
-    const { error } = await resend.emails.send({
-      from: 'A5I5 <onboarding@resend.dev>',   // Cambia si quieres
+    // Enviar correo por Resend
+    // const { error } = await resend.emails.send({
+    //   from: 'A5I5 <onboarding@resend.dev>',   // Cambia si quieres
+    //   to: [email],
+    //   subject: 'Verifica tu correo electrónico - A5I5',
+    //   react: VerificationEmail({
+    //     verificationUrl,
+    //     name: nombre.trim()
+    //   }),
+    // });
+
+    //enviar correo por smtp
+    const html = await render(
+      VerificationEmail({
+        verificationUrl,
+        name: nombre.trim(),
+      })
+    );
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM || 'A5I5 <no-reply@a5i5.com>',
       to: [email],
       subject: 'Verifica tu correo electrónico - A5I5',
-      react: VerificationEmail({
-        verificationUrl,
-        name: nombre.trim()
-      }),
+      html,
     });
 
-    if (error) {
-      verificationTokens.delete(token); // Limpiar si falla el envío
-      console.error('Error de Resend:', error);
-      return NextResponse.json(
-        { error: "No se pudo enviar el correo de verificación" },
-        { status: 500 }
-      );
-    }
+
+    // if (error) {
+    //   verificationTokens.delete(token); // Limpiar si falla el envío
+    //   console.error('Error de Resend:', error);
+    //   return NextResponse.json(
+    //     { error: "No se pudo enviar el correo de verificación" },
+    //     { status: 500 }
+    //   );
+    // }
 
     console.log(`✅ Correo de verificación enviado a: ${email}`);
     console.log(`🔑 Token generado: ${token}`);
@@ -111,6 +139,17 @@ export async function GET(request: NextRequest) {
         { error: 'El token ha expirado' },
         { status: 410 }
       );
+    }
+
+    if (!usuarios.some((u) => u.email === stored.email)) {
+      usuarios.push({
+        nombre: stored.nombre,
+        email: stored.email,
+        password: stored.password,
+        telefono: stored.telefono,
+        preguntasSecretas: [],
+        respuestasSecretas: [],
+      });
     }
 
     verificationTokens.delete(token);

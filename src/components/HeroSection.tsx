@@ -71,37 +71,37 @@ export default function HeroSection() {
           <section className="py-16 md:py-20 px-6 md:px-12 bg-purple/10 backdrop-blur-sm animate-slideUp">
             <div className="max-w-5xl mx-auto">
               <h2 className="font-headline text-4xl md:text-5xl font-black text-off-white uppercase tracking-tight mb-12 text-center">
-                ¿QUÉ ES SIELO?
+                ¿QUÉ ES A5I5?
               </h2>
 
               <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 text-justify">
                 {/* Columna izquierda */}
                 <div className="space-y-6 md:pr-8">
                   <p className="que-es">
-                    SIELO es una inteligencia artificial que conversa por voz con las personas adultas mayores, reconoce cómo se sienten emocionalmente y responde de manera cercana y comprensiva.
+                    Nuestra solución, A5I5, integra algoritmos avanzados de procesamiento de voz para detectar y atender las necesidades emocionales de la población adulta mayor.
                   </p>
 
-                  <p className="font-body text-lg text-cream/90 italic">
+                  {/* <p className="font-body text-lg text-cream/90 italic">
                     El nombre <span className="font-bold text-purple">SIELO</span> significa
                     <span className="font-headline text-purple"> Sistema de Inteligencia Emocional para la Longevidad</span>.
                   </p>
 
                   <p className="font-body text-lg text-cream leading-relaxed">
                     Representa la idea de acompañar, escuchar y cuidar las emociones a lo largo del tiempo, con una tecnología sencilla y humana.
-                  </p>
+                  </p> */}
                 </div>
 
                 {/* Columna derecha */}
                 <div className="md:pl-12 lg:pl-16 border-l-4 border-purple/40 pl-8 md:pl-12">
-                  <h3 className="font-headline text-2xl md:text-3xl text-off-white mb-6 text-center">
+                  {/* <h3 className="font-headline text-2xl md:text-3xl text-off-white mb-6 text-center">
                     Enfoque principal
-                  </h3>
+                  </h3> */}
                   <p className="enfoque">
-                    SIELO se enfoca en la longevidad y la salud emocional, buscando que las personas adultas mayores se sientan acompañadas, escuchadas y valoradas, sin necesidad de usar tecnología complicada.
+                    A5I5 se especializa en promover la longevidad activa y la salud emocional, garantizando que las personas adultas mayores se sientan acompañadas, escuchadas y valoradas.
                   </p>
-                  <p className="font-body text-lg text-cream leading-relaxed mt-6">
+                  {/* <p className="font-body text-lg text-cream leading-relaxed mt-6">
                     Es una herramienta que transforma una simple conversación en un vínculo de confianza y calma diaria.
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
