@@ -72,8 +72,8 @@ export default function Navbar() {
           <li><a href="/ContactForm" onClick={(e) => handleNavClick(e, "/ContactForm")} className='hover:text-purple transition'>Buzón</a></li>
         </ul>
 
-        <div className="hidden md:flex relative items-center rounded-full bg-white/90 px-2 py-0.5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] text-slate-900">
-          <div className="w-[160px] md:w-[200px] lg:w-[240px]">
+        <div className="hidden md:flex relative items-center rounded-full bg-cream/85 border border-purple/20 px-2 py-0.5 shadow-[0_8px_18px_-12px_rgba(144,103,198,0.4)] text-dark-purple">
+          <div className="w-[150px] md:w-[190px] lg:w-[220px]">
             <div className="gcse-search"></div>
           </div>
         </div>
