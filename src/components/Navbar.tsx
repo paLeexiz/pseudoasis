@@ -1,5 +1,6 @@
 "use client";
 import Image from 'next/image';
+import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
 export default function Navbar() {
@@ -21,7 +22,7 @@ export default function Navbar() {
   // const [open, setOpen] = useState(false);
   /**pruebas para hacer un navbar desplegable */
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 bg-transparent backdrop-blur-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-transparent backdrop-blur-sm">
       {/* Imagen del círculo con estrella */}
       <div className="busquedas flex items-center gap-3 md:gap-4">
         <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
@@ -47,9 +48,7 @@ export default function Navbar() {
           />
         </div>
 
-        {/* <script async src="https://cse.google.com/cse.js?cx=47f3488f9331244f1">
-        </script>
-        <div className="gcse-search"></div> */}
+        
       </div>
 
       <div className="flex items-center gap-10">
@@ -73,11 +72,21 @@ export default function Navbar() {
           <li><a href="/ContactForm" onClick={(e) => handleNavClick(e, "/ContactForm")} className='hover:text-purple transition'>Buzón</a></li>
         </ul>
 
-        <button className="w-10 h-10 bg-light-purple/30 rounded-full flex items-center justify-center text-off-white">
+        <div className="hidden md:flex relative items-center rounded-full bg-cream/85 border border-purple/20 px-2 py-0.5 shadow-[0_8px_18px_-12px_rgba(144,103,198,0.4)] text-dark-purple">
+          <div className="w-[150px] md:w-[190px] lg:w-[220px]">
+            <div className="gcse-search"></div>
+          </div>
+        </div>
+        <Script
+          src="https://cse.google.com/cse.js?cx=47f3488f9331244f1"
+          strategy="afterInteractive"
+        />
+
+        {/* <button className="w-10 h-10 bg-light-purple/30 rounded-full flex items-center justify-center text-off-white">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-        </button>
+        </button> */}
       </div>
     </nav>
   );
