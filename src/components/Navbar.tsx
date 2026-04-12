@@ -22,7 +22,7 @@ export default function Navbar() {
   // const [open, setOpen] = useState(false);
   /**pruebas para hacer un navbar desplegable */
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 bg-transparent backdrop-blur-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-transparent backdrop-blur-sm">
       {/* Imagen del círculo con estrella */}
       <div className="busquedas flex items-center gap-3 md:gap-4">
         <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
@@ -72,8 +72,8 @@ export default function Navbar() {
           <li><a href="/ContactForm" onClick={(e) => handleNavClick(e, "/ContactForm")} className='hover:text-purple transition'>Buzón</a></li>
         </ul>
 
-        <div className="hidden md:flex relative items-center rounded-full bg-white/90 px-3 py-1 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] text-slate-900">
-          <div className="w-[180px] md:w-[220px] lg:w-[260px]">
+        <div className="hidden md:flex relative items-center rounded-full bg-white/90 px-2 py-0.5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] text-slate-900">
+          <div className="w-[160px] md:w-[200px] lg:w-[240px]">
             <div className="gcse-search"></div>
           </div>
         </div>
