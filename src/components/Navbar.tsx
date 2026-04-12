@@ -1,5 +1,6 @@
 "use client";
 import Image from 'next/image';
+import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
 export default function Navbar() {
@@ -71,9 +72,18 @@ export default function Navbar() {
           <li><a href="/ContactForm" onClick={(e) => handleNavClick(e, "/ContactForm")} className='hover:text-purple transition'>Buzón</a></li>
         </ul>
 
-        <script async src="https://cse.google.com/cse.js?cx=47f3488f9331244f1">
-        </script>
-        <div className="gcse-search"></div>
+        <div className="hidden md:flex relative items-center rounded-full bg-white/90 px-3 py-1 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] text-slate-900">
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-slate-500 pointer-events-none">
+            🔎
+          </div>
+          <div className="w-[220px] md:w-[260px] lg:w-[320px]">
+            <div className="gcse-search"></div>
+          </div>
+        </div>
+        <Script
+          src="https://cse.google.com/cse.js?cx=47f3488f9331244f1"
+          strategy="afterInteractive"
+        />
 
         {/* <button className="w-10 h-10 bg-light-purple/30 rounded-full flex items-center justify-center text-off-white">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
