@@ -6,6 +6,8 @@ interface Usuario {
   email: string;
   password: string;
   telefono: string;
+  preguntasSecretas: string[];
+  respuestasSecretas: string[];
 }
 
 export const usuarios: Usuario[] = [];
