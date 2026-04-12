@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
       expiresAt
     });
 
-    const verificationUrl = `http://localhost:3000/validacion?token=${token}&email=${encodeURIComponent(email)}`;
+    const verificationUrl = `https://pseudoa5i5oasis1.vercel.app/validacion?token=${token}&email=${encodeURIComponent(email)}`;
 
     // Enviar correo por Resend
     // const { error } = await resend.emails.send({
