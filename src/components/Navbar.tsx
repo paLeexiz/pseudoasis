@@ -47,9 +47,7 @@ export default function Navbar() {
           />
         </div>
 
-        {/* <script async src="https://cse.google.com/cse.js?cx=47f3488f9331244f1">
-        </script>
-        <div className="gcse-search"></div> */}
+        
       </div>
 
       <div className="flex items-center gap-10">
@@ -73,11 +71,15 @@ export default function Navbar() {
           <li><a href="/ContactForm" onClick={(e) => handleNavClick(e, "/ContactForm")} className='hover:text-purple transition'>Buzón</a></li>
         </ul>
 
-        <button className="w-10 h-10 bg-light-purple/30 rounded-full flex items-center justify-center text-off-white">
+        <script async src="https://cse.google.com/cse.js?cx=47f3488f9331244f1">
+        </script>
+        <div className="gcse-search"></div>
+
+        {/* <button className="w-10 h-10 bg-light-purple/30 rounded-full flex items-center justify-center text-off-white">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-        </button>
+        </button> */}
       </div>
     </nav>
   );
