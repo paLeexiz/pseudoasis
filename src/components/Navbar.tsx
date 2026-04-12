@@ -73,9 +73,6 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden md:flex relative items-center rounded-full bg-white/90 px-3 py-1 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] text-slate-900">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-500 pointer-events-none">
-            🔎
-          </div>
           <div className="w-[180px] md:w-[220px] lg:w-[260px]">
             <div className="gcse-search"></div>
           </div>
