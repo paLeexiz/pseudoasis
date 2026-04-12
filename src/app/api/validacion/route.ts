@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { render } from '@react-email/render';
-import VerificationEmail from '../../../lib/verification-email';import { usuarios } from '@/lib/usuarios-db';
+import VerificationEmail from '../../../lib/verification-email';
+import { usuarios } from '@/lib/usuarios-db';
+import { sign, verify, JwtPayload } from 'jsonwebtoken';
+
 // ==================== CONFIGURACIÓN ====================
 
 // hay que hacerlo con un smpt
@@ -17,14 +20,14 @@ auth: {
 });
 // const resend = new Resend('re_FhE4P6Xk_2aD9zQFu89wCKimkNsp18kEe'); // ← Cambia por tu API Key real
 
-// Almacenamiento temporal en memoria (mejor que simulación)
-const verificationTokens = new Map<string, {
+const jwtSecret = process.env.JWT_SECRET || '';
+
+type VerificationTokenPayload = {
   nombre: string;
   email: string;
   password: string;
   telefono: string;
-  expiresAt: Date;
-}>();
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,20 +48,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generar token más seguro usando crypto
-    const token = crypto.randomUUID();
-    const expiresAt = new Date(Date.now() + 1000 * 60 * 30); // Expira en 30 minutos
+    if (!jwtSecret) {
+      console.error('JWT_SECRET no está configurado');
+      return NextResponse.json(
+        { error: 'Error de configuración del servidor' },
+        { status: 500 }
+      );
+    }
 
-    // Guardar información del usuario temporalmente
-    verificationTokens.set(token, {
+    const payload: VerificationTokenPayload = {
       nombre: nombre.trim(),
       email: email.toLowerCase(),
-      password,        // En producción nunca guardes la contraseña en plano
-      telefono: telefono || "",
-      expiresAt
-    });
+      password, // En producción no guardes contraseñas en texto plano.
+      telefono: telefono || '',
+    };
 
-    const verificationUrl = `http://localhost:3000/validacion?token=${token}&email=${encodeURIComponent(email)}`;
+    const token = sign(payload, jwtSecret, { expiresIn: '30m' });
+    const verificationUrl = `https://pseudoa5i5oasis1.vercel.app/validacion?token=${encodeURIComponent(token)}`;
 
     // Enviar correo por Resend
     // const { error } = await resend.emails.send({
@@ -115,44 +121,50 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const token = request.nextUrl.searchParams.get('token');
-    const email = request.nextUrl.searchParams.get('email');
-
-    if (!token || !email) {
+    if (!jwtSecret) {
+      console.error('JWT_SECRET no está configurado');
       return NextResponse.json(
-        { error: 'Faltan token o email en la consulta' },
+        { error: 'Error de configuración del servidor' },
+        { status: 500 }
+      );
+    }
+
+    const token = request.nextUrl.searchParams.get('token');
+    if (!token) {
+      return NextResponse.json(
+        { error: 'Falta el token en la consulta' },
         { status: 400 }
       );
     }
 
-    const stored = verificationTokens.get(token);
-    if (!stored || stored.email !== email.toLowerCase()) {
+    let decoded: VerificationTokenPayload & JwtPayload;
+    try {
+      decoded = verify(token, jwtSecret) as VerificationTokenPayload & JwtPayload;
+    } catch (error: any) {
+      return NextResponse.json(
+        { error: 'Token inválido o expirado' },
+        { status: 400 }
+      );
+    }
+
+    if (!decoded || typeof decoded.email !== 'string') {
       return NextResponse.json(
         { error: 'Token inválido o email no coincide' },
         { status: 400 }
       );
     }
 
-    if (stored.expiresAt < new Date()) {
-      verificationTokens.delete(token);
-      return NextResponse.json(
-        { error: 'El token ha expirado' },
-        { status: 410 }
-      );
-    }
-
-    if (!usuarios.some((u) => u.email === stored.email)) {
+    const email = decoded.email.toLowerCase();
+    if (!usuarios.some((u) => u.email === email)) {
       usuarios.push({
-        nombre: stored.nombre,
-        email: stored.email,
-        password: stored.password,
-        telefono: stored.telefono,
+        nombre: decoded.nombre,
+        email,
+        password: decoded.password,
+        telefono: decoded.telefono,
         preguntasSecretas: [],
         respuestasSecretas: [],
       });
     }
-
-    verificationTokens.delete(token);
 
     return NextResponse.json({
       success: true,
