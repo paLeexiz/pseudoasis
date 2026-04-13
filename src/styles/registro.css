@@ -48,6 +48,7 @@
 .input-group {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.5rem; /* Añadido para espaciado */
 }
 
 .input-group label {
@@ -57,7 +58,8 @@
   color: var(--text-label);
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
   width: 100%;
   padding: 0.875rem 1rem;
   background: var(--input-bg);
@@ -68,7 +70,8 @@
   transition: all 0.2s ease;
 }
 
-.input-group input:focus {
+.input-group input:focus,
+.input-group select:focus {
   outline: none;
   border-color: var(--input-focus);
   box-shadow: 0 0 0 3px var(--input-focus-ring);

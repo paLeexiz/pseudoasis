@@ -206,79 +206,121 @@ export default function RegisterForm() {
             {errors.preguntasSecretas && <span className="error block mb-2">{errors.preguntasSecretas}</span>}
             {errors.respuestasSecretas && <span className="error block mb-2">{errors.respuestasSecretas}</span>}
 
+            {/* Pregunta 1 */}
             <div className="input-group">
-              <select
-                name="preguntaSecreta1"
-                required
-                onChange={handleChange}
-                value={form.preguntaSecreta1}
-                className="w-full bg-black/50 border-2 border-black p-4 text-white rounded-xl outline-none focus:border-blue-600 transition-all placeholder:text-gray-700 mt-2 mb-2"
-                style={{ appearance: 'none' }}
-              >
-                <option value="" disabled>Selecciona la pregunta 1</option>
-                {getOpcionesDisponibles(form.preguntaSecreta1).map((opcion, idx) => (
-                  <option key={idx} value={opcion}>{opcion}</option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  name="preguntaSecreta1"
+                  required
+                  onChange={handleChange}
+                  value={form.preguntaSecreta1}
+                  className="w-full appearance-none bg-white/10 backdrop-blur-md
+                            border border-white/20 text-white text-sm
+                            px-4 py-3 pr-10 rounded-xl
+                            focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                >
+                  <option value="" disabled className="text-black">
+                    Selecciona la pregunta 1
+                  </option>
+                  {getOpcionesDisponibles(form.preguntaSecreta1).map((opcion, idx) => (
+                    <option key={idx} value={opcion} className="text-black">
+                      {opcion}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-white/60">
+                  ▼
+                </div>
+              </div>
             </div>
+
             <div className="input-group">
               <input
                 name="respuestaSecreta1"
-                placeholder=" "
+                placeholder="Respuesta 1"
                 required
                 onChange={handleChange}
+                className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl
+                          focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
               />
-              <label>Respuesta 1</label>
             </div>
 
+            {/* Pregunta 2 */}
             <div className="input-group">
-              <select
-                name="preguntaSecreta2"
-                required
-                onChange={handleChange}
-                value={form.preguntaSecreta2}
-                className="w-full bg-black/50 border-2 border-black p-4 text-white rounded-xl outline-none focus:border-blue-600 transition-all placeholder:text-gray-700 mt-2 mb-2"
-                style={{ appearance: 'none' }}
-              >
-                <option value="" disabled>Selecciona la pregunta 2</option>
-                {getOpcionesDisponibles(form.preguntaSecreta2).map((opcion, idx) => (
-                  <option key={idx} value={opcion}>{opcion}</option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  name="preguntaSecreta2"
+                  required
+                  onChange={handleChange}
+                  value={form.preguntaSecreta2}
+                  className="w-full appearance-none bg-white/10 backdrop-blur-md
+                            border border-white/20 text-white text-sm
+                            px-4 py-3 pr-10 rounded-xl
+                            focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                >
+                  <option value="" disabled className="text-black">
+                    Selecciona la pregunta 2
+                  </option>
+                  {getOpcionesDisponibles(form.preguntaSecreta2).map((opcion, idx) => (
+                    <option key={idx} value={opcion} className="text-black">
+                      {opcion}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-white/60">
+                  ▼
+                </div>
+              </div>
             </div>
+
             <div className="input-group">
               <input
                 name="respuestaSecreta2"
-                placeholder=" "
+                placeholder="Respuesta 2"
                 required
                 onChange={handleChange}
+                className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl
+                          focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
               />
-              <label>Respuesta 2</label>
+            </div>
+
+            {/* Pregunta 3 */}
+            <div className="input-group">
+              <div className="relative">
+                <select
+                  name="preguntaSecreta3"
+                  required
+                  onChange={handleChange}
+                  value={form.preguntaSecreta3}
+                  className="w-full appearance-none bg-white/10 backdrop-blur-md
+                            border border-white/20 text-white text-sm
+                            px-4 py-3 pr-10 rounded-xl
+                            focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                >
+                  <option value="" disabled className="text-black">
+                    Selecciona la pregunta 3
+                  </option>
+                  {getOpcionesDisponibles(form.preguntaSecreta3).map((opcion, idx) => (
+                    <option key={idx} value={opcion} className="text-black">
+                      {opcion}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-white/60">
+                  ▼
+                </div>
+              </div>
             </div>
 
             <div className="input-group">
-              <select
-                name="preguntaSecreta3"
-                required
-                onChange={handleChange}
-                value={form.preguntaSecreta3}
-                className="w-full bg-black/50 border-2 border-black p-4 text-white rounded-xl outline-none focus:border-blue-600 transition-all placeholder:text-gray-700 mt-2 mb-2"
-                style={{ appearance: 'none' }}
-              >
-                <option value="" disabled>Selecciona la pregunta 3</option>
-                {getOpcionesDisponibles(form.preguntaSecreta3).map((opcion, idx) => (
-                  <option key={idx} value={opcion}>{opcion}</option>
-                ))}
-              </select>
-            </div>
-            <div className="input-group">
               <input
                 name="respuestaSecreta3"
-                placeholder=" "
+                placeholder="Respuesta 3"
                 required
                 onChange={handleChange}
+                className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 rounded-xl
+                          focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
               />
-              <label>Respuesta 3</label>
             </div>
 
 
