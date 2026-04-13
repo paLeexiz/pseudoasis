@@ -144,7 +144,11 @@ export default function RegisterForm() {
         <div className="form-box">
           <h2>Registro de Usuario</h2>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}autoComplete="off">
+
+             <input type="text" name="fakeuser" style={{ display: "none" }} />
+             <input type="password" name="fakepass" style={{ display: "none" }} />
+
             <div className="input-group">
               <input
                 name="nombre"
@@ -226,6 +230,7 @@ export default function RegisterForm() {
                 name="respuestaSecreta1"
                 placeholder=" "
                 required
+                autoComplete="new-password"
                 onChange={handleChange}
               />
               <label>Respuesta 1</label>
@@ -251,6 +256,7 @@ export default function RegisterForm() {
                 name="respuestaSecreta2"
                 placeholder=" "
                 required
+                autoComplete="new-password"
                 onChange={handleChange}
               />
               <label>Respuesta 2</label>
@@ -276,6 +282,7 @@ export default function RegisterForm() {
                 name="respuestaSecreta3"
                 placeholder=" "
                 required
+                autoComplete="new-password"
                 onChange={handleChange}
               />
               <label>Respuesta 3</label>
