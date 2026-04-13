@@ -1,4 +1,4 @@
-import { RecuperaContrasena } from "@/components/RecuperaContrasena";
+import { RecuperaContrasena } from "../../components/RecuperaContrasena";
 
 export default function RecuperarPasswordPage() {
   return (
