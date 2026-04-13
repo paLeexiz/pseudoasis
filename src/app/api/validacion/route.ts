@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     };
 
     const token = sign(payload, jwtSecret, { expiresIn: '30m' });
-    const verificationUrl = `https://pseudoa5i5oasis1.vercel.app/validacion?token=${encodeURIComponent(token)}`;
+    const verificationUrl = `https://pseudoa5i5oasis1.vercel.app/validacion?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`;
 
     // Enviar correo por Resend
     // const { error } = await resend.emails.send({
@@ -130,9 +130,10 @@ export async function GET(request: NextRequest) {
     }
 
     const token = request.nextUrl.searchParams.get('token');
-    if (!token) {
+    const emailParam = request.nextUrl.searchParams.get('email');
+    if (!token || !emailParam) {
       return NextResponse.json(
-        { error: 'Falta el token en la consulta' },
+        { error: 'Faltan token o email en la consulta' },
         { status: 400 }
       );
     }
@@ -155,6 +156,13 @@ export async function GET(request: NextRequest) {
     }
 
     const email = decoded.email.toLowerCase();
+    if (email !== emailParam.toLowerCase()) {
+      return NextResponse.json(
+        { error: 'Token inválido o email no coincide' },
+        { status: 400 }
+      );
+    }
+
     if (!usuarios.some((u) => u.email === email)) {
       usuarios.push({
         nombre: decoded.nombre,
@@ -168,7 +176,8 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: 'Verificación exitosa. Tu correo ha sido confirmado.'
+      message: 'Verificación exitosa. Tu correo ha sido confirmado.',
+      email,
     });
   } catch (error: any) {
     console.error('Error en GET /api/validacion:', error);
